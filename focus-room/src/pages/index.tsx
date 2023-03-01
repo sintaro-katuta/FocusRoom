@@ -4,10 +4,22 @@ import { signIn, signOut, useSession } from "next-auth/react";
 export default function Home() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
-  return (
-    <div>
-      {!session && (
-        <>
+  if (session) {
+    return (
+      <>
+        <div>
+          name:{session.user.name} <br />
+          image:
+          <img src={session.user.image} alt="" height={100} width={100} />
+          <br />
+          <button onClick={() => signOut()}>Sign out</button>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div>
           {loading ? (
             <>Loading ...</>
           ) : (
@@ -16,17 +28,8 @@ export default function Home() {
               <button onClick={() => signIn()}>Sign in</button>
             </>
           )}
-        </>
-      )}
-      {session && (
-        <>
-          name:{session.user.name} <br />
-          image:
-          <img src={session.user.image} alt="" height={100} width={100} />
-          <br />
-          <button onClick={() => signOut()}>Sign out</button>
-        </>
-      )}
-    </div>
-  );
+        </div>
+      </>
+    );
+  }
 }
