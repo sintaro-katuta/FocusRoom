@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@supabase/ui": "^0.36.5"
+  }
+}

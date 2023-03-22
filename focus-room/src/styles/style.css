@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Kosugi&display=swap");
+.theme-font {
+  font-family: "Kosugi", sans-serif;
+}
+
+.primary-color {
+  color: #f0f5f9;
+}
+
+.secondary-color {
+  color: #c9d6df;
+}
+
+.tertiary-color {
+  color: #52616b;
+}
+
+.quaternary-color {
+  color: #1e2022;
+}
+
+.primary-background-color {
+  background-color: #f0f5f9;
+}
+
+.secondary-background-color {
+  background-color: #c9d6df;
+}
+
+.tertiary-background-color {
+  background-color: #52616b;
+}
+
+.quaternary-background-color {
+  background-color: #1e2022;
+}
