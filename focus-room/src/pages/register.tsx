@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Auth, Typography, Button } from "@supabase/ui";
 import { supabase } from "@/../lib/supabaseClient";
+import { useForm } from "react-hook-form";
 import Header from "components/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as Icon from "react-bootstrap-icons";

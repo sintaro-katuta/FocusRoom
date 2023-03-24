@@ -1,5 +1,10 @@
 {
   "dependencies": {
-    "@supabase/ui": "^0.36.5"
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.14",
+    "@supabase/ui": "^0.36.5",
+    "react-hook-form": "^7.43.7"
   }
 }
