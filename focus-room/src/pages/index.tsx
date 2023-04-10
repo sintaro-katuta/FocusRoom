@@ -54,9 +54,9 @@ const Home: NextPage = () => {
                 </li>
               </ul>
 
-              <Icon.ArrowDown className="my-3" width={30} height={30} />
+              <Icon.ArrowDown className="my-2" width={30} height={30} />
 
-              <div className="ms-4 border border-dark">
+              <div className="ms-4 mt-3 border border-dark">
                 <h3 className="mt-2 fw-light text-center">
                   そんな方々に向けた超集中プラットフォーム
                 </h3>
