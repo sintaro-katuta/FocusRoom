@@ -1,5 +1,6 @@
 import { supabase } from "lib/supabaseClient";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import Router from "next/router";
 
@@ -8,28 +9,26 @@ function Header() {
   const [user, setUser] = useState(null);
   const [avatar, setAvatar] = useState("/guest_icon.png");
 
+  useEffect(() => {
+    getUser();
+    supabase.auth.onAuthStateChange((_event, session) => {
+      getUser();
+    });
+  }, []);
+
   const getUser = async () => {
     //ログインのセッションを取得
     const { data } = await supabase.auth.getSession();
-    console.log(data);
     //セッションがあるとき現在ログインしているユーザを取得
-    if (data.session !== null) {
+    if (data.session) {
       const {
         data: { user },
       } = await supabase.auth.getUser();
       setUser(user.user_metadata.name);
       setAvatar(user.user_metadata.avatar_url);
+      setSession(data);
     }
   };
-
-  useEffect(() => {
-    setSession(supabase.auth.getSession());
-    console.log("session", session);
-    getUser();
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
 
   async function signout() {
     try {
@@ -38,6 +37,7 @@ function Header() {
         throw error;
       }
       setUser(null);
+      setSession(null);
       setAvatar("/guest_icon.png");
       await Router.push("/");
     } catch {
@@ -47,9 +47,9 @@ function Header() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark primary-background-color">
       <div className="container-fluid">
-        <a className="navbar-brand text-dark" href="/">
+        <Link className="navbar-brand text-dark" href="/">
           Focus Room
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -63,20 +63,20 @@ function Header() {
         </button>
         <div className="collapse navbar-collapse show" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <a
+            <Link
               className="nav-link active text-dark"
               aria-current="page"
               href="/"
             >
               Home
-            </a>
-            <a
+            </Link>
+            <Link
               href="main"
               className="nav-link active text-dark"
               aria-current="page"
             >
               Main
-            </a>
+            </Link>
           </div>
         </div>
         <div className="d-flex">
@@ -90,18 +90,18 @@ function Header() {
             alt=""
             className="d-inline-block align-text-top border border-dark rounded-circle bg-white mx-2"
           />
-          {user && (
+          {session && (
             //ユーザデータがあったらサインアウトを表示
             <button className="btn btn-danger my-2" onClick={() => signout()}>
               Sign Out
             </button>
           )}
 
-          {user == null && (
+          {session == null && (
             //ユーザデータがなかったらサインインを表示
             <button
               className="btn btn-primary my-2"
-              onClick={() => Router.push("/register")}
+              onClick={() => Router.push("/signIn")}
             >
               Sign In
             </button>
