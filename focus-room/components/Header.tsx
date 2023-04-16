@@ -7,14 +7,14 @@ import Router from "next/router";
 function Header() {
   const [session, setSession] = useState(null);
   const [user, setUser] = useState(null);
-  const [avatar, setAvatar] = useState("/guest_icon.png");
+  const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
     getUser();
     supabase.auth.onAuthStateChange((_event, session) => {
       getUser();
     });
-  }, []);
+  }, [setUser]);
 
   const getUser = async () => {
     //ログインのセッションを取得
@@ -26,6 +26,9 @@ function Header() {
       } = await supabase.auth.getUser();
       setUser(user.user_metadata.name);
       setAvatar(user.user_metadata.avatar_url);
+      setSession(data);
+    }else{
+      setAvatar("/guest_icon.png");
       setSession(data);
     }
   };

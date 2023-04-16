@@ -2,11 +2,13 @@ import { useState } from "react";
 import { supabase } from "lib/supabaseClient";
 import Link from "next/link";
 import Header from "components/Header";
+import useUser from "hooks/useUser";
 import * as Icon from "react-bootstrap-icons";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { session, GithubSignIn, GoogleSignIn } = useUser();
 
   const doLogin = async () => {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -20,23 +22,6 @@ export default function Login() {
     console.log(data, error);
   };
 
-  const GoogleSignIn = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: "http://localhost:3000/main",
-      },
-    });
-  };
-
-  const GithubSignIn = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "github",
-      options: {
-        redirectTo: "http://localhost:3000/main",
-      },
-    });
-  };
   return (
     <>
       <Header />
