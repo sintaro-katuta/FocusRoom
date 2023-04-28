@@ -29,7 +29,7 @@ function Header() {
       setSession(data);
     }else{
       setAvatar("/guest_icon.png");
-      setSession(data);
+      setSession(null);
     }
   };
 
