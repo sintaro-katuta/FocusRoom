@@ -24,8 +24,8 @@ function Header() {
       const {
         data: { user },
       } = await supabase.auth.getUser();
-      setUser(user.user_metadata.name);
-      setAvatar(user.user_metadata.avatar_url);
+      setUser(user?.user_metadata.name);
+      setAvatar(user?.user_metadata.avatar_url);
       setSession(data);
     }else{
       setAvatar("/guest_icon.png");
