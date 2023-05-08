@@ -1,6 +1,5 @@
-import { Card } from "@nextui-org/react";
 import { useState, useEffect, useRef } from "react";
-import { Switch } from '@material-ui/core';
+import { Switch,Card } from '@material-ui/core';
 import * as Icon from "react-bootstrap-icons";
 import { FormGroup, FormControlLabel, } from '@mui/material';
 
