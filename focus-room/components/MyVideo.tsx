@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Switch } from '@material-ui/core';
+import Switch from '@material-ui/core/Switch';
 import Card from "@material-ui/core/Card";
 import * as Icon from "react-bootstrap-icons";
 import { FormGroup, FormControlLabel, } from '@mui/material';
