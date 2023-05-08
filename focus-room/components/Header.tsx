@@ -5,7 +5,7 @@ import Image from "next/image";
 import Router from "next/router";
 
 function Header() {
-  const [session, setSession] = useState(null);
+  const [session, setSession] = useState<any | null>(null);
   const [user, setUser] = useState(null);
   const [avatar, setAvatar] = useState("");
 
