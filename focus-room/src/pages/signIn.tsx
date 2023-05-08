@@ -8,22 +8,6 @@ import { Auth } from "@supabase/auth-ui-react"
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { session, GithubSignIn, GoogleSignIn } = useUser();
-
-  const doLogin = async () => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    if (error) {
-      console.log(email, password);
-      alert(error);
-    }
-    console.log(data, error);
-  };
-
   return (
     <>
       <Header />

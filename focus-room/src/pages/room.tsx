@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Router from "next/router";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import Room_Camera from "components/Room";
 
 export default function Room() {
   const { query, isReady } = useRouter();
@@ -16,7 +17,7 @@ export default function Room() {
     if (!query.id) {
       Router.push("/main");
     }
-  }, []);
+  },[]);
 
   const GetRoom_Settings = async () => {
     let { data: room_settings } = await supabase
@@ -27,6 +28,8 @@ export default function Room() {
 
     setSettings(room_settings)
   };
+
+
 
   return (
     <>
@@ -41,6 +44,7 @@ export default function Room() {
           </>
           )}
       </ul>
+      <Room_Camera></Room_Camera>
     </>
   );
 }
