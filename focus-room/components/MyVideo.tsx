@@ -3,7 +3,7 @@ import * as Icon from "react-bootstrap-icons";
 import { Switch, Card, CardMedia, Button } from '@mui/material';
 
 export default function MyVideo() {
-  const videoRef = useRef(null); // ビデオのRefを作成(このRefを変えることで、映像を映したりすることができます)
+  const videoRef: any = useRef(null); // ビデオのRefを作成(このRefを変えることで、映像を映したりすることができます)
   const [cameravisible, setCameravisible] = useState(true);
   const [volumevisible, setVolumevisible] = useState(true);
 
