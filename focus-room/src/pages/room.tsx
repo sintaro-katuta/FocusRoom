@@ -1,7 +1,6 @@
 import Header from "components/Header";
 import { supabase } from "lib/supabaseClient";
 import { useRouter } from "next/router";
-import Router from "next/router";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Room_Camera from "components/Room";
@@ -20,7 +19,7 @@ export default function Room() {
   },[]);
 
   const GetRoom_Settings = async () => {
-    let { data: room_settings } = await supabase
+    let { data: room_settings } :any = await supabase
     .from("room_settings")
     .select(`seat,reader(*)`)
     .eq("id", query.id)
