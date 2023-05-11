@@ -7,7 +7,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { NextServer } from "next/dist/server/next";
 
 export default function Main() {
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms]: any = useState([]);
   useEffect(() => {
     const getRooms = async () => {
       let {
