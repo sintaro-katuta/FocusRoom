@@ -12,7 +12,7 @@ export default function useUser(){
         )
 
         return () => {
-            authListener?.unsubscribe();
+            authListener.subscription.unsubscribe();
         }
     },[])
 
