@@ -1,7 +1,6 @@
 import { supabase } from "lib/supabaseClient";
 import Header from "components/Header";
 import { useEffect, useState } from "react";
-import Router from "next/router";
 import Link from "next/link";
 import dayjs, { Dayjs } from "dayjs";
 import { NextServer } from "next/dist/server/next";
@@ -31,7 +30,7 @@ export default function Main() {
       <Header />
       <div className="container">
         <div className="row row-cols-1 g-3">
-          {rooms.map((rooms, index) => (
+          {rooms.map((rooms: any, index: number) => (
             <div className="card p-0" key={index}>
               <div className="card-body">
                 <div className="row">
