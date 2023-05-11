@@ -11,7 +11,7 @@ export default function MyVideo() {
     navigator.mediaDevices.getDisplayMedia({ audio: false, video: true })
   }
   
-  function switch_camera(e: string){
+  function switch_camera(e: any){
     setCameravisible(!cameravisible)    
     navigator.mediaDevices
     .getUserMedia({
@@ -45,7 +45,7 @@ export default function MyVideo() {
     });
   }
 
-  function switch_volume(e: string){
+  function switch_volume(e: any){
     setVolumevisible(!volumevisible)
     if(e.target.checked){
       videoRef.current.volume = 0;
