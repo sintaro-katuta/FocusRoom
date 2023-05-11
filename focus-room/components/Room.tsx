@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import MyVideo from "./MyVideo";
 
 export default function Room() {
-  const [devices, setDevices] = useState([]);
+  const [devices, setDevices]: any = useState([]);
 
   //  デバイス情報を更新しています。
   const refreshDevices = useCallback(async () => {
