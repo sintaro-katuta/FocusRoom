@@ -6,7 +6,7 @@ export default function useUser(){
 
     useEffect(() => {
         const { data:authListener } = supabase.auth.onAuthStateChange(
-            (session) => {
+            (session: any) => {
                 setSession(session)
             }
         )
