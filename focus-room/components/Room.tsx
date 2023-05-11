@@ -27,7 +27,6 @@ export default function Room() {
   }, []);
   return (
       <MyVideo
-          device={devices[0]}
       />
   );
 }
