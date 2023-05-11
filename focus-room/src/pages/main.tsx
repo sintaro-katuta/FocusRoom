@@ -3,11 +3,11 @@ import Header from "components/Header";
 import { useEffect, useState } from "react";
 import Router from "next/router";
 import Link from "next/link";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
+import { NextServer } from "next/dist/server/next";
 
 export default function Main() {
   const [rooms, setRooms] = useState([]);
-  const [created_at, setCreate_at] = useState([]);
   useEffect(() => {
     const getRooms = async () => {
       let {
@@ -19,10 +19,10 @@ export default function Main() {
     };
     getRooms();
   });
-  const GetDateDiff = (from) => {
+  const GetDateDiff = (from :dayjs.Dayjs) => {
     const to = dayjs();
-    let dateDiff = to.diff(from);
-    dateDiff = dayjs(dateDiff).format("D日 h時間 m分 s秒");
+    let dateDiff: number | string = to.diff(from);
+    dateDiff = dayjs(dateDiff).format("Mヶ月 D日 h時間 m分 s秒");
 
     return dateDiff;
   };

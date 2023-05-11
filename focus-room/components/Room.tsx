@@ -15,10 +15,6 @@ export default function Room() {
     setDevices(latestDevices);
   }, []);
 
-  function muteDevices(){
-    setDevices([])
-  }
-
   useEffect(() => {
     refreshDevices(); // デバイス情報を更新
     //デバイスが変更されたときに、デバイスを初期化するようにしています。

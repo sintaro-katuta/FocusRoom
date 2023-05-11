@@ -1,9 +1,5 @@
-import { useState } from "react";
 import { supabase } from "lib/supabaseClient";
-import Link from "next/link";
 import Header from "components/Header";
-import useUser from "hooks/useUser";
-import * as Icon from "react-bootstrap-icons";
 import { Auth } from "@supabase/auth-ui-react"
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 

@@ -1,34 +1,48 @@
 import { useState, useEffect, useRef } from "react";
-import Switch from '@material-ui/core/Switch';
-import Card from "@material-ui/core/Card";
 import * as Icon from "react-bootstrap-icons";
-import { FormGroup, FormControlLabel, } from '@mui/material';
+import { Switch, Card, CardMedia, Button } from '@mui/material';
 
-export default function MyVideo({ device }) {
+export default function MyVideo() {
   const videoRef = useRef(null); // ビデオのRefを作成(このRefを変えることで、映像を映したりすることができます)
   const [cameravisible, setCameravisible] = useState(true);
   const [volumevisible, setVolumevisible] = useState(true);
+
+  function share_display(){
+    navigator.mediaDevices.getDisplayMedia({ audio: false, video: true })
+  }
+  
   function switch_camera(e){
-    setCameravisible(!cameravisible)
-    if(e.target.checked){
-      navigator.mediaDevices
-      .getUserMedia({
-        // ここで、選択したデバイスをセットしています。
-        video: device,
-      })
-      .then((stream) => {
+    setCameravisible(!cameravisible)    
+    navigator.mediaDevices
+    .getUserMedia({
+      // ここで、選択したデバイスをセットしています。
+      audio: true,
+      video: {
+        width: {
+          min: 640,
+          max: 640,
+        },
+        height: {
+          min: 480,
+          max: 480,
+        }
+      }
+    })
+    .then((stream) => {
+      if(e.target.checked){
         if (!videoRef?.current) return;
-        // 現在接続されているデバイスを使いストリーミングしています。
-        videoRef.current.srcObject = stream;
-        videoRef.current.play();
-      })
-      .catch((e) => {
-        // エラー処理
-        alert()
-      });
-    }else{
+      // 現在接続されているデバイスを使いストリーミングしています。
+      videoRef.current.srcObject = stream;
+      videoRef.current.volume = 0;
+      videoRef.current.play();
+      }else{
         videoRef.current.srcObject = null;
-    }
+      }
+    })
+    .catch((e) => {
+      // エラー処理
+      alert()
+    });
   }
 
   function switch_volume(e){
@@ -43,18 +57,15 @@ export default function MyVideo({ device }) {
   return (
     <>
         <Card>
-            <video ref={videoRef} id="video"></video>
+          <CardMedia>
+            <video ref={videoRef} id="video" height="240"></video>
+          </CardMedia>
+            {cameravisible ? <Icon.CameraVideoOff className="ms-3" width={20} height={20} /> : <Icon.CameraVideo className="ms-3" width={20} height={20} /> }
+            <Switch color="primary" onChange={(e) => switch_camera(e)}/>
+            {volumevisible ? <Icon.VolumeMuteFill width={20} height={20} /> : <Icon.VolumeUpFill width={20} height={20} />}
+            <Switch color="primary" onChange={(e) => switch_volume(e)}/>
+            <Button variant="text" onClick={() => share_display()}>画面共有</Button>
         </Card>
-        <FormGroup className="ps-3">
-          {cameravisible ? <Icon.CameraVideoOff className="mt-2" width={20} height={20} /> : <Icon.CameraVideo className="mt-2" width={20} height={20} /> }
-          <FormControlLabel
-            control={<Switch color="primary" onChange={(e) => switch_camera(e)}/>}
-          />
-          {volumevisible ? <Icon.VolumeMuteFill className="mt-2" width={20} height={20} /> : <Icon.VolumeUpFill className="mt-2" width={20} height={20} />}
-          <FormControlLabel
-            control={<Switch color="primary" onChange={(e) => switch_volume(e)}/>}
-          />
-        </FormGroup>
     </>
   );
 }
