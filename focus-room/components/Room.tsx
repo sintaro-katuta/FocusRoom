@@ -1,4 +1,3 @@
-import { Grid } from "@nextui-org/react";
 import { useEffect, useState, useCallback } from "react";
 import MyVideo from "./MyVideo";
 
@@ -27,12 +26,8 @@ export default function Room() {
     };
   }, []);
   return (
-    <Grid.Container gap={2} justify="center">
-      <Grid xs={12} sm={4}>
-        <MyVideo
-            device={devices[0]}
-        />
-      </Grid>
-    </Grid.Container>
+      <MyVideo
+          device={devices[0]}
+      />
   );
 }
