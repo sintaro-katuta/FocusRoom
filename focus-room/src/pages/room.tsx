@@ -7,14 +7,16 @@ import Room_Camera from "components/Room";
 
 export default function Room() {
   const { query, isReady } = useRouter();
-  const [settings, setSettings] = useState();
+  const [settings, setSettings] = useState<any>();
+
+  const router = useRouter();
 
   useEffect(() => {
     if (isReady) {
       GetRoom_Settings();
     }
     if (!query.id) {
-      Router.push("/main");
+      router.push("/main");
     }
   },[]);
 
@@ -37,7 +39,7 @@ export default function Room() {
         {settings && (
           <>
             <li className="list-group-item">Reader: {settings.reader.full_name}
-              <Image src={settings.reader.avatarurl} className="mx-2 rounded-circle" width={30} height={30}/>
+              <Image src={settings.reader.avatarurl} className="mx-2 rounded-circle" width={30} height={30} alt="リーダアイコン"/>
             </li> 
             <li className="list-group-item">Seat: {settings.seat}</li>
           </>

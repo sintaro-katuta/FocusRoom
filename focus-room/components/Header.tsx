@@ -86,13 +86,15 @@ function Header() {
           <p className="mt-4" style={{ color: "#52616B" }}>
             {user}
           </p>
-          <Image
+          {avatar && (
+            <Image
             src={avatar}
             width={70}
             height={70}
-            alt=""
+            alt="My avatar icon"
             className="d-inline-block align-text-top border border-dark rounded-circle bg-white mx-2"
           />
+          )}
           {session && (
             //ユーザデータがあったらサインアウトを表示
             <button className="btn btn-danger my-2" onClick={() => signout()}>
