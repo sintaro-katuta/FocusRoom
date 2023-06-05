@@ -24,9 +24,9 @@ export default function Room() {
         refreshDevices
       );
     };
-  }, []);
+  }, [refreshDevices]);
   return (
-      <MyVideo
-      />
+    <MyVideo
+    />
   );
 }

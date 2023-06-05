@@ -17,8 +17,8 @@ export default function Main() {
       setRooms(rooms);
     };
     getRooms();
-  });
-  const GetDateDiff = (from :dayjs.Dayjs) => {
+  }, []);
+  const GetDateDiff = (from: dayjs.Dayjs) => {
     const to = dayjs();
     let dateDiff: number | string = to.diff(from);
     dateDiff = dayjs(dateDiff).format("Mヶ月 D日 h時間 m分 s秒");

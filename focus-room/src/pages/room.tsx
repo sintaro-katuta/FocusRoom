@@ -18,10 +18,10 @@ export default function Room() {
       .eq("id", query.id)
       .single();
 
-    setSettings(room_settings)
+    setSettings(room_settings);
   };
 
-  GetRoom_Settings()
+  GetRoom_Settings();
 
   return (
     <>
@@ -29,8 +29,15 @@ export default function Room() {
       <ul className="list-group">
         {settings && (
           <>
-            <li className="list-group-item">Reader: {settings.reader.full_name}
-              <Image src={settings.reader.avatarurl} className="mx-2 rounded-circle" width={30} height={30} alt="リーダアイコン" />
+            <li className="list-group-item">
+              Reader: {settings.reader.full_name}
+              <Image
+                src={settings.reader.avatarurl}
+                className="mx-2 rounded-circle"
+                width={30}
+                height={30}
+                alt="リーダアイコン"
+              />
             </li>
             <li className="list-group-item">Seat: {settings.seat}</li>
           </>
