@@ -4,9 +4,15 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import dayjs, { Dayjs } from "dayjs";
 import { NextServer } from "next/dist/server/next";
+import { useRouter } from "next/router";
 
 export default function Main() {
   const [rooms, setRooms]: any = useState([]);
+  const [roomName, setRoomName]: any = useState()
+  const [visible, setVisible] = useState(false);
+
+  const router = useRouter()
+
   useEffect(() => {
     const getRooms = async () => {
       let {
@@ -18,6 +24,7 @@ export default function Main() {
     };
     getRooms();
   }, []);
+
   const GetDateDiff = (from: dayjs.Dayjs) => {
     const to = dayjs();
     let dateDiff: number | string = to.diff(from);
@@ -26,7 +33,14 @@ export default function Main() {
     return dateDiff;
   };
 
-  console.log(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+  const createRoom = async (e: any) => {
+    const { data, error } = await supabase
+      .from("rooms")
+      .upsert({ name: roomName })
+      .select();
+    router.push("/main")
+  };
+
   return (
     <>
       <Header />
@@ -52,6 +66,15 @@ export default function Main() {
             </div>
           ))}
         </div>
+        {visible
+          ?
+          <div>
+            <input type="text" onChange={(e) => setRoomName(e.target.value)} />
+            <button className="btn btn-primary" onClick={(e) => createRoom(e)}>作成</button>
+          </div>
+          :
+          <button className="btn btn-primary" onClick={() => setVisible(!visible)}>部屋を作成</button>
+        }
       </div>
     </>
   );

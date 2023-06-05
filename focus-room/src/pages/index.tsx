@@ -14,7 +14,7 @@ const Home: NextPage = () => {
       </Head>
       <div className="container-lg">
         <div className="row">
-          <ul className="list-group col" style={{ maxWidth: "250px;" }}>
+          <ul className="list-group col-3" style={{ maxWidth: "250px;" }}>
             <li className="list-group-item secondary-background-color">
               <a
                 href="#primary-content"
@@ -58,7 +58,8 @@ const Home: NextPage = () => {
 
               <div className="ms-4 mt-3 border border-dark">
                 <h3 className="mt-2 fw-light text-center">
-                  そんな方々に向けた超集中プラットフォーム
+                  そんな方々に向けた<span className="fw-bold">超集中</span>
+                  プラットフォーム
                 </h3>
                 <h3 className="mt-2 ms-4 py-3 py-2 fw-light text-center">
                   Focus Room
@@ -68,7 +69,8 @@ const Home: NextPage = () => {
               <h3 className="mt-2 ms-3 fw-light">-集中</h3>
               <p className="mt-2 py-4 ms-4 h6 fw-light rounded secondary-background-color">
                 集中して作業に取り組みたいとき一人でするよりも友達としたり、カフェでしたほうがはかどりませんか？
-                一人でも複数人でも集中できるそんな部屋を共有することができます
+                一人でも複数人でも集中できるそんな
+                <span className="fw-bold">部屋</span>を共有することができます
               </p>
 
               <h3 className="mt-2 ms-3 fw-light">-部屋</h3>

@@ -8,7 +8,7 @@ export default function Login() {
     <>
       <Header />
       <div className="container">
-        <h2 className="text-center p-2">Login</h2>
+        <h2 className="text-center p-2">Sign in</h2>
         <Auth
           supabaseClient={supabase}
           appearance={{
