@@ -8,7 +8,7 @@ export default function MyVideo() {
   const [volumevisible, setVolumevisible] = useState(false);
 
   // カメラを切り替えるための関数
-  async function switchCamera(e) {
+  async function switchCamera(e: any) {
     if (e.target.checked) {
       navigator.mediaDevices.getUserMedia({ video: { width: 300, height: 150 }, audio: false })
         .then((stream) => {
@@ -29,7 +29,7 @@ export default function MyVideo() {
   }
 
   // マイクを切り替えるための関数
-  async function switchMicrophone(e) {
+  async function switchMicrophone(e: any) {
     if (e.target.checked) {
       navigator.mediaDevices.getUserMedia({ audio: true })
         .then((stream) => {
