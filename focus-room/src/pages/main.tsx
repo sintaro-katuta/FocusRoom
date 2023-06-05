@@ -25,6 +25,8 @@ export default function Main() {
 
     return dateDiff;
   };
+
+  console.log(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
   return (
     <>
       <Header />
