@@ -11,26 +11,17 @@ export default function Room() {
 
   const router = useRouter();
 
-  useEffect(() => {
-    if (isReady) {
-      GetRoom_Settings();
-    }
-    if (!query.id) {
-      router.push("/main");
-    }
-  },[]);
-
   const GetRoom_Settings = async () => {
-    let { data: room_settings } :any = await supabase
-    .from("room_settings")
-    .select(`seat,reader(*)`)
-    .eq("id", query.id)
-    .single();
+    let { data: room_settings }: any = await supabase
+      .from("room_settings")
+      .select(`seat,reader(*)`)
+      .eq("id", query.id)
+      .single();
 
     setSettings(room_settings)
   };
 
-
+  GetRoom_Settings()
 
   return (
     <>
@@ -39,11 +30,11 @@ export default function Room() {
         {settings && (
           <>
             <li className="list-group-item">Reader: {settings.reader.full_name}
-              <Image src={settings.reader.avatarurl} className="mx-2 rounded-circle" width={30} height={30} alt="リーダアイコン"/>
-            </li> 
+              <Image src={settings.reader.avatarurl} className="mx-2 rounded-circle" width={30} height={30} alt="リーダアイコン" />
+            </li>
             <li className="list-group-item">Seat: {settings.seat}</li>
           </>
-          )}
+        )}
       </ul>
       <Room_Camera></Room_Camera>
     </>
