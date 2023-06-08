@@ -46,6 +46,15 @@ export default function Main() {
       <Header />
       <div className="container">
         <div className="row row-cols-1 g-3">
+          {visible
+            ?
+            <div className="input-group">
+              <input type="text" className="form-control" placeholder="部屋名" aria-label="部屋名" aria-describedby="input-group-button-right" onChange={(e) => setRoomName(e.target.value)} />
+              <button type="button" className="btn btn-outline-secondary" id="input-group-button-right" onClick={(e) => createRoom(e)}>作成</button>
+            </div>
+            :
+            <button className="btn btn-primary" onClick={() => setVisible(!visible)}>部屋を作成</button>
+          }
           {rooms.map((rooms: any, index: number) => (
             <div className="card p-0" key={index}>
               <div className="card-body">
@@ -66,15 +75,6 @@ export default function Main() {
             </div>
           ))}
         </div>
-        {visible
-          ?
-          <div>
-            <input type="text" onChange={(e) => setRoomName(e.target.value)} />
-            <button className="btn btn-primary" onClick={(e) => createRoom(e)}>作成</button>
-          </div>
-          :
-          <button className="btn btn-primary" onClick={() => setVisible(!visible)}>部屋を作成</button>
-        }
       </div>
     </>
   );
