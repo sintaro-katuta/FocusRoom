@@ -35,7 +35,7 @@ const Home: NextPage = () => {
 
               <Icon.ArrowDown className="my-2" width={30} height={30} />
 
-              <div className="ms-3 mt-3 mb-4 border border-dark">
+              <div className="ms-2 me-2 mt-3 mb-3 border border-dark">
                 <h4 className="mt-4 fw-light text-center">
                   そんな方々に向けた<span className="fw-bold">超集中</span>
                   プラットフォーム
