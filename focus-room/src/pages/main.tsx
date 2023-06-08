@@ -57,7 +57,7 @@ export default function Main() {
       dateDiff = `${second}秒`
     }
     return dateDiff;
-    // let dateDiff: string = `${month}ヶ月${day}日${hour}時間${minute}分${second}秒`
+
   };
 
   const createRoom = async (e: any) => {
@@ -65,7 +65,7 @@ export default function Main() {
       .from("rooms")
       .upsert({ name: roomName })
       .select();
-    router.push("/main")
+    router.reload()
   };
 
   return (

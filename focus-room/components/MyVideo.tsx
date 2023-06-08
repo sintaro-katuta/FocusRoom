@@ -57,6 +57,7 @@ export default function MyVideo() {
       <Card>
         <video id="video" src=""></video>
         <audio id="audio" src=""></audio>
+        <br />
         {cameravisible ? <Icon.CameraVideo className="ms-3" width={20} height={20} /> : <Icon.CameraVideoOff className="ms-3" width={20} height={20} />}
         <Switch color="primary" onChange={(e) => switchCamera(e)} />
         {volumevisible ? <Icon.VolumeUpFill width={20} height={20} /> : <Icon.VolumeMuteFill width={20} height={20} />}
