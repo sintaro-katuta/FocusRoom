@@ -14,27 +14,6 @@ const Home: NextPage = () => {
       </Head>
       <div className="container-lg">
         <div className="row">
-          <ul className="list-group col-3" style={{ maxWidth: "250px;" }}>
-            <li className="list-group-item secondary-background-color">
-              <a
-                href="#primary-content"
-                className="quaternary-color text-decoration-none"
-              >
-                FocusRoom とは
-              </a>
-            </li>
-            <li className="list-group-item secondary-background-color">
-              <a
-                href="#secondary-content"
-                className="quaternary-color text-decoration-none"
-              >
-                FocusRoom の 使い方
-              </a>
-            </li>
-            <li className="list-group-item secondary-background-color">
-              アイテム3
-            </li>
-          </ul>
           <div className="col">
             <div id="primary-content" className="row">
               <h2 className="fw-light">Focus Room とは</h2>
