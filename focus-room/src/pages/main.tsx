@@ -2,7 +2,10 @@ import { supabase } from "lib/supabaseClient";
 import Header from "components/Header";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import ja from 'dayjs/locale/ja';
 import { NextServer } from "next/dist/server/next";
 import { useRouter } from "next/router";
 
@@ -12,6 +15,11 @@ export default function Main() {
   const [visible, setVisible] = useState(false);
 
   const router = useRouter()
+
+  dayjs.locale(ja);
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  dayjs.tz.setDefault("Asia/Tokyo");
 
   useEffect(() => {
     const getRooms = async () => {
@@ -25,12 +33,31 @@ export default function Main() {
     getRooms();
   }, []);
 
-  const GetDateDiff = (from: dayjs.Dayjs) => {
-    const to = dayjs();
-    let dateDiff: number | string = to.diff(from);
-    dateDiff = dayjs(dateDiff).format("Mヶ月 D日 h時間 m分 s秒");
-
+  const GetDateDiff = (to: dayjs.Dayjs) => {
+    to = dayjs(to).tz()
+    const from = dayjs().tz();
+    const year = from.diff(to, 'year')
+    const month = from.diff(to, 'month')
+    const day = from.diff(to, 'day')
+    const hour = from.diff(to, 'hour')
+    const minute = from.diff(to, 'minute')
+    const second = from.diff(to, 'second')
+    let dateDiff: string = ''
+    if (month >= 12) {
+      dateDiff = `${year}年`
+    } else if (day >= 30) {
+      dateDiff = `${month}ヶ月`
+    } else if (hour >= 24) {
+      dateDiff = `${day}日`
+    } else if (minute >= 60) {
+      dateDiff = `${hour}時間`
+    } else if (second >= 60) {
+      dateDiff = `${minute}分`
+    } else {
+      dateDiff = `${second}秒`
+    }
     return dateDiff;
+    // let dateDiff: string = `${month}ヶ月${day}日${hour}時間${minute}分${second}秒`
   };
 
   const createRoom = async (e: any) => {
