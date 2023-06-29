@@ -1,10 +1,10 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +13,7 @@
     "http-server": "^14.1.1",
     "next": "^13.4.7",
     "ws": "^8.13.0"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }

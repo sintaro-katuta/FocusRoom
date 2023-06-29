@@ -2,7 +2,7 @@
 module.exports = {
   images: {
     domains: ["avatars.githubusercontent.com", "lh3.googleusercontent.com"],
-  }, 
+  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback.fs = false;
@@ -11,6 +11,16 @@ module.exports = {
       config.resolve.fallback.dns = false;
       config.resolve.fallback.tls = false;
     }
+    return config;
+  },
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 200,
+      };
+    }
+
     return config;
   },
 };

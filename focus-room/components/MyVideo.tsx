@@ -10,8 +10,8 @@ export default function MyVideo() {
   let candidates: any
 
   const WSS_URL = 'ws://localhost:3010/'
-  let server = null
-  let peerConnection = null
+  let server: any = null
+  let peerConnection: any = null
 
   function prepareWebSocket() {
     server = new WebSocket(WSS_URL)
@@ -29,7 +29,33 @@ export default function MyVideo() {
   }
 
   async function onMessage(e: any) {
+    const text = await e.data.text()
+    const msg = JSON.parse(text)
 
+    if (msg.type === 'offer') {
+      receiveSessionDescription(msg)
+      await createAnswer()
+      return
+    }
+
+    if (msg.type === 'answer') {
+      receiveSessionDescription(msg)
+      return
+    }
+  }
+
+  async function wakeupVideo() {
+    console.log('Wakeup video')
+    const config = { video: true, audio: false }
+
+    const stream = await navigator.mediaDevices.getUserMedia(config)
+    let cameraElemet: any = document.querySelector("#video")
+
+    stream.getTracks().forEach((track) => {
+      peerConnection.addTrack(track, stream)
+    })
+    cameraElemet.srcObject = stream
+    cameraElemet.play()
   }
 
   function prepareRTCPeerConnection() {
@@ -39,19 +65,49 @@ export default function MyVideo() {
     peerConnection.ontrack = onTrack
     peerConnection.onicecandidate = onIceCandidate
   }
+  async function createOffer() {
+    const sessionDescription = await peerConnection.createOffer()
+    await peerConnection.setLocalDescription(sessionDescription)
+  }
+
+  async function createAnswer() {
+    const sessionDescription = await peerConnection.createAnswer()
+    await peerConnection.setLocalDescription(sessionDescription)
+  }
+
+  function sendSessionDescription(description: any) {
+    const data = JSON.stringify(description)
+    server.send(data)
+    console.log("description.sdp", description.sdp)
+  }
+
+  async function receiveSessionDescription(description: any) {
+    await peerConnection.setRemoteDescription(description)
+    console.log("description.sdp", description.sdp)
+  }
 
   function onTrack(e: any) {
-
+    let cameraElemet: any = document.querySelector("#video2")
+    let stream = e.streams[0]
+    cameraElemet.srcObject = stream
+    cameraElemet.play()
   }
 
   function onIceCandidate(e: any) {
-
+    console.log("onicecandidate")
+    if (e.candidate !== null) return
+    const description = peerConnection.localDescription
+    sendSessionDescription(description)
   }
 
   function prepare() {
     prepareRTCPeerConnection()
     prepareWebSocket()
+    wakeupVideo()
+  }
 
+  function connect() {
+    createOffer()
   }
 
   // カメラを切り替えるための関数
@@ -61,7 +117,7 @@ export default function MyVideo() {
         .then((stream) => {
           // 取得した音声ストリームを利用するための処理を記述します
           let cameraElemet: any = document.querySelector("#video")
-          cameraElemet.srcObject = stream4
+          cameraElemet.srcObject = stream
           stream.getTracks().forEach((track) => {
             senderConnection.addTrack(track, stream);
           });
@@ -127,12 +183,14 @@ export default function MyVideo() {
         <video id="video" src=""></video>
         <audio id="audio" src=""></audio>
         <br />
+        <video id="video2" src=""></video>
         {cameravisible ? <Icon.CameraVideo className="ms-3" width={20} height={20} /> : <Icon.CameraVideoOff className="ms-3" width={20} height={20} />}
         <Switch color="primary" onChange={(e) => switchCamera(e)} />
         {volumevisible ? <Icon.VolumeUpFill width={20} height={20} /> : <Icon.VolumeMuteFill width={20} height={20} />}
         <Switch color="primary" onChange={(e) => switchMicrophone(e)} />
         <Button variant="text" onClick={() => share_display()}>画面共有</Button>
         <Button variant="text" onClick={() => prepare()}>prepare</Button>
+        <Button variant="text" onClick={() => connect()}>connect</Button>
       </Card>
     </>
   );
