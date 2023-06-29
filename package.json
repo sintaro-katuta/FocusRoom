@@ -8,9 +8,12 @@
     "@supabase/ui": "^0.36.5",
     "bootstrap-icons": "^1.10.5",
     "dayjs": "^1.11.7",
+    "openssl": "^2.0.0",
     "react-hook-form": "^7.43.7",
     "react-router-dom": "^6.11.1",
-    "socket.io": "^4.6.1"
+    "skyway-js": "^4.4.5",
+    "socket.io": "^4.6.1",
+    "ws": "^8.13.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.6",

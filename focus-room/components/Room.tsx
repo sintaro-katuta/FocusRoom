@@ -3,7 +3,6 @@ import MyVideo from "./MyVideo";
 
 export default function Room() {
   const [devices, setDevices]: any = useState([]);
-
   //  デバイス情報を更新しています。
   const refreshDevices = useCallback(async () => {
     // ここでオーディオのあるデバイスをフィルタリングしています。
@@ -26,7 +25,6 @@ export default function Room() {
     };
   }, [refreshDevices]);
   return (
-    <MyVideo
-    />
+    <MyVideo />
   );
 }
